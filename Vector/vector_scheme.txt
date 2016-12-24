@@ -1,0 +1,60 @@
+/* This file is simply contains all the functions (both public and private) used within the vector.c source file.
+ * I thought it would be helpful to see the public functions along with all their associated helpers
+ * in a hierarchical form. The public functions are left justified with their helper functions indented
+ * underneath them. If a function is indented at the same level as another that means that they serve as helpers
+ * to the  main function but not to each other.
+ */
+
+
+/* SECTION: Initializers */
+struct Vector *Vector_Initialize( size_t const );
+
+struct Vector *Vector_InitializeWithCapacity( size_t const, size_t const  );
+	
+    static void **Vector_AllocateInitialDataBuffer( size_t const  );
+
+/* SECTION: Main Operations */
+void Vector_Push( void const *, struct Vector * );
+
+    static void Vector_IncreaseCapacity( struct Vector * );
+
+    static void Vector_CopyCurrentBufferToNewBuffer( void **restrict, void const **restrict, size_t const );
+
+    static void **Vector_ResizeDataBuffer( size_t const );
+
+    static void Vector_ReallocateDataBuffer( struct Vector * );
+		
+    	static void Vector_FreeEntireDataBuffer( void ** const );
+
+void *Vector_Pop( struct Vector * );
+
+    static void Vector_CopyVectorElement( void *restrict, void const *restrict, size_t const );
+
+void *Vector_AtIndex( size_t const, struct Vector const * );
+
+
+/* SECTION: Predicates */
+uint8_t Vector_IsFull( struct Vector const * );
+
+uint8_t Vector_IsEmpty( struct Vector const * );
+
+
+/* SECTION: Clean-up */
+void Vector_Free( struct Vector *, void(*)(void *) );
+
+    static void Vector_FreeAllElements( struct Vector *, void(*)(void *) );
+
+    static void Vector_FreeEntireDataBuffer( void ** const );  // same function used in Vector_ReallocateDataBuffer()
+
+    static uint8_t Vector_HasBeenFreed( struct Vector const * );
+
+
+/* SECTION: Additional Functionality */
+void Vector_SetLength( size_t const, struct Vector * );
+
+size_t Vector_GetLength( struct Vector const * );
+
+size_t Vector_GetCapacity( struct Vector const * );
+
+
+
