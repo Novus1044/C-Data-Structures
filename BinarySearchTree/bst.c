@@ -132,7 +132,6 @@ BST_Insert( void const *SourceData,
     return;
 }
 
-/************* THIS NEEDS FIXED TO TAKE THE TREE ********** -- each needs a sub function to recursively iterate */
 static void
 BST_RecursivePreOrderTraversal( struct BSTNode const *CurrentTreeNode,
 				void(*DerefFn)(void *) )
